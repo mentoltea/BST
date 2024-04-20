@@ -9,23 +9,13 @@ int main() {
     srand(time(nullptr));
 
     BinarySearchTree tree;
-    BinarySearchTree tree2;
-    for (int i=15; i>1; i--) {
-        tree.insert(rand()%i, rand()%i);
+    tree.insert(0,0);
+    for (int i=1; i<10; i++) {
+        tree.insert(i, 2*i);
     }
-    tree.output_tree();
-    cout << "--------" << endl;
-    
-    auto range = tree.equalRange(tree.begin()->first);
-    cout << tree.begin()->first << endl;
-    auto it = range.first;
-    for (; it != range.second; it++)  {
-        cout << "{" << it->first << ", " << it->second << "}" << endl;
-    }
-    try {
-        it++;
-        cout << "{" << it->first << ", " << it->second << "}" << endl;
-    } catch (std::runtime_error e) {
-        cout << "error " << e.what() << endl;
-    }
+    BinarySearchTree::Iterator It1 = tree.find(5);
+    BinarySearchTree::Iterator It2 = tree.find(6);
+    auto pair = make_pair(It1, It2);
+    auto rng = tree.equalRange(5);
+    cout << (pair == rng) << endl;
 }
